@@ -12,7 +12,12 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // MongoDB Connection
-const { MongoMemoryServer } = require('mongodb-memory-server');
+// const { MongoMemoryServer } = require('mongodb-memory-server');
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log('MongoDB Connected'))
+.catch(err => console.log(err));
 
 const connectDB = async () => {
   try {
