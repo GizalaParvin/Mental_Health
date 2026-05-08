@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-primary: #F4F9F9; /* Soft mist */
+    --bg-secondary: #E8F3F1; /* Gentle sage tint */
+    --text-primary: #1F2937;
+    --text-secondary: #4B5563;
+    --accent: #5EEAD4;
+    --accent-hover: #14B8A6;
+    --card-bg: rgba(255, 255, 255, 0.85); /* Frosty white */
+    --error: #EF4444;
+  }
+
+  .dark {
+    --bg-primary: #020617; /* Very deep slate */
+    --bg-secondary: #0F172A; /* Slate 900 */
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1; 
+    --accent: #38BDF8;
+    --accent-hover: #0284C7;
+    --card-bg: rgba(30, 41, 59, 0.85); /* Slightly lighter card */
+    --error: #F87171;
+  }
+
+  body {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    transition: background 0.5s ease, color 0.5s ease;
+    @apply font-sans min-h-screen;
+  }
+}
+
+/* Custom Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.dark .glass {
+  background: rgba(30, 41, 59, 0.85); /* Darker and more opaque for readability */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+}
+
+/* Breathing animation */
+@keyframes breathe {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+.animate-breathe {
+  animation: breathe 8s infinite ease-in-out;
+}
