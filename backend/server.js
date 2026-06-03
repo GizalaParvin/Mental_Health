@@ -12,21 +12,14 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // MongoDB Connection
-// const { MongoMemoryServer } = require('mongodb-memory-server');
-// const mongoose = require('mongoose');
-
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log('MongoDB Connected'))
-.catch(err => console.log(err));
-
 const connectDB = async () => {
   try {
-    const mongoServer = await MongoMemoryServer.create();
-    const uri = mongoServer.getUri();
-    await mongoose.connect(uri);
-    console.log('MongoDB Memory Server connected successfully');
+    const mongoURI = process.env.MONGODB_URI;
+    await mongoose.connect(mongoURI);
+    console.log('MongoDB connected successfully');
   } catch (err) {
     console.error('MongoDB connection error:', err);
+    process.exit(1);
   }
 };
 connectDB();
